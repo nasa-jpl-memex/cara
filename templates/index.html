@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <title>Mememx CrawlForm</title>
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+	
+    <link href="static/css/bootstrap.css" rel="stylesheet" />
+	<link href="static/css/bootstrap-glyphicons.css" rel="stylesheet" />
+    <link href="static/css/style.css" rel="stylesheet" />
+	<script src="static/js/jquery.js"></script>
+	
+  </head>
+  <body>
+	<div class="container-fluid full_height">
+	  <nav class="navbar navbar-default" id="navbar">
+		<div class="container-fluid">
+		  <img src="static/img/JPL_Logo.png" id="jpllogo">
+		  <div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			  <span class="sr-only">Toggle navigation</span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><p>Memex CrawlForm</p></a>
+		  </div>
+		</div>
+	  </nav>
+	  <div class="container-fluid mainbody full_height">
+	  <div class="row">
+	    <div class="col-md-7 col-md-offset-2">
+		  {% if error %}
+		  <div class="alert alert-danger" role="alert">{{error}}
+		   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  </div>
+		  {% endif %}
+		  {% if message %}
+		  <div class="jumbotron">
+			<h2>{{message}}</h2>
+		  </div>
+			{% if backhome %}
+			<button class="btn btn-primary btn-lg active" onclick="goBack()" >Back to Home</button>
+			{% else %}
+			  <h3><span class="label label-default"><span id="required">*</span> fields are required.</span></h3>
+		  {% endif %}
+		  {% endif %}
+		  {% if form %}
+			<form method="POST" action="/" class="">
+			  {{ form.csrf_token }}
+			  <div class="form-group">
+				<label>First Name:  </label>
+				{{ form.first(size=20) }} <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+			  </div>
+			  <div class="form-group">
+				<label>Last Name:</label>
+				{{ form.last(size=20) }} <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+			  </div>
+			  <div class="form-group">
+				<label>Contact Email:</label>
+				{{ form.email(size=20) }} <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+			  </div>
+			  <div class="form-group">
+				<label>Description of Use Case:</label>
+				{{ form.description(size=20) }} <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+			  </div>
+			  <div class="form-group">
+				<label>Exploratory Crawl or Defined Crawl?</label> <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+				{{ form.crawl_type(size=20) }}
+			  </div>
+			  <div class="form-group">
+				<label>One off or recurring? If recurring, how often?</label>
+				{{ form.recurring(size=20) }} <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+			  </div>
+			  <div class="form-group">
+				<label>Seed Urls</label>
+				{{ form.seed_ulrs(size=20) }} <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+			  </div>
+			  <div class="form-group">
+				<label>Crawling configuration request</label>
+				{{ form.crawling_config(size=20) }} <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+			  </div>
+			  <div class="form-group">
+				<label>Do you need a specific type of content? Images? Videos? pdfs?</label> <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+				{{ form.content_type(size=20) }}
+			  </div>
+			  <div class="form-group">
+				<label>How much data do you require?</label>
+				{{ form.how_much_data(size=20) }} <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+			  </div>
+			  <div class="form-group">
+				<label>Are there any custom metrics that you need - or need to meet?</label>
+				{{ form.custom_metrics(size=20) }} <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+			  </div>
+			  <div class="form-group">
+				<label>Do you require any extraction or post-processing of content? If so can you explain?</label>
+				{{ form.extraction(size=20) }} <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+			  </div>
+			  <div class="form-group">
+				<label>Delivery format:</label><br>
+				{{ form.common_data_repository(size=20) }} Common Data Repository <br>
+				{{ form.raw_files(size=20) }} Raw files<br>
+				{{ form.nutch_sequence_files(size=20) }} Nutch Sequence Files<br>
+				{{ form.custom_schema(size=20) }} Custom Schema<br>
+				{{ form.common_crawl_format(size=20) }} Common Crawl Format<br>
+				{{ form.warc(size=20) }} WARC<br>
+			  </div>
+			  <div class="form-group">
+				<label>When do you need it by?</label>
+				{{ form.needed_by(size=20) }} <span id="required">{% if form.first.flags.required %}*{% endif %}</span>
+			  </div>
+			  <button type="submit" class="btn btn-primary btn-lg active" value="Submit">Submit</button>
+			</form>
+			{% endif %}
+	  </div>
+	  </div>
+		
+	  </div>
+	</div>
+
+	<!-- Javascript code -->
+	<script type="text/javascript">
+	  function goBack() {
+		url = window.location;
+		window.location.href = url.origin;
+	  }
+	</script>
+
+	<!-- JS Files -->
+	<script src="static/js/bootstrap.js"></script>
+	<!-- JS Files -->
+
+  </body>
+</html>

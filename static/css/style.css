@@ -1,0 +1,60 @@
+html,
+body {
+    height: 100%;
+}
+
+.navbar{
+    margin-bottom: 0px;
+}
+
+.row{
+    height: 0px;
+    margin-right: 0px;
+}
+.full_height{
+    height: 100%;
+}
+
+.main_height{
+    height: 96%;
+}
+
+.btn{
+    background-color: #bbffff;
+    color: #000000;
+    border-radius: 0px;
+}
+
+.status{
+    float: right;
+}
+
+#navbar{
+    background-color: #595959;
+    border-radius: 0px;
+    border: none;
+    border-bottom: double 1px #ffffff;
+}
+
+#navbar p{
+    font-size: 30px;
+    padding-bottom: 0xp;
+    font-weight: 200;
+    color: white;
+}
+
+
+.mainbody{
+    padding-top: 40px;
+    margin-bottom: 60px;
+}
+
+#jpllogo{
+    float: right;
+    width: 6%;
+}
+
+#required{
+    color: red;
+    font-size: 20px;
+}
