@@ -31,33 +31,8 @@ def send_mail(form):
     common_crawl_format = form.common_crawl_format.data
     warc = form.warc.data
     needed_by = form.needed_by.data
-    client_email = "mail -s 'Memex Crawl Request' {0} <<< 'Thank you for submitting your crawl data acquisition request to NASA JPL.\n Someone from the Crawl Team will contact you personally certainly within the next 24 hours. Our Crawl Infrastructure is already working on acquiring your requested data. If you have any issues, please do not hesitate to contact us on memex-crawl@jpl.nasa.gov. Thank you'".format(email)
-    memex_email = """ mail -s '[New Crawl Request]' boustani@jpl.nasa.gov <<<
-    'Request details:
-        First Name:{0}
-        Last Name:{1}
-        Email: {2}
-        Description: {3}
-        Crawl Type: {4}
-        Recurring: {5}
-        Seed Urls: {6}
-        Crawling Config: {7}
-        Content Type: {8}
-        How much data: {9}
-        Custom Metrics: {10}
-        Extraction: {11}
-        Common Data Repository: {12}
-        Raw Files: {13}
-        Nutch Sequence: {14}
-        Custom Schema: {15}
-        Common Crawl Format: {16}
-        WARC: {17}
-        Needed by: {18}
-
-    Thanks
-    Memex Crawl Team
-    '
-    """.format(first, last, email, description, crawl_type, recurring, seed_ulrs, crawling_config, content_type, how_much_data, custom_metrics, extraction, common_data_repository, raw_files, nutch_sequence_files, custom_schema, common_crawl_format, warc, needed_by)
+    client_email = "mail -s 'Memex Crawl Request' {0} <<< 'Thank you for submitting your crawl data acquisition request to NASA JPL. Someone from the Crawl Team will contact you personally certainly within the next 24 hours. Our Crawl Infrastructure is already working on acquiring your requested data. If you have any issues, please do not hesitate to contact us on memex-crawl@jpl.nasa.gov. Thank you'".format(email)
+    memex_email = """ mail -s '[New Crawl Request]' boustani@jpl.nasa.gov <<< \n'Request details: \n First Name:{0} \n Last Name:{1} \n Email: {2} \n Description: {3} \n Crawl Type: {4} \n Recurring: {5} \n Seed Urls: {6} \n Crawling Config: {7} \n Content Type: {8} \n How much data: {9} \n  Custom Metrics: {10} \n  Extraction: {11} \n  Common Data Repository: {12} \n Raw Files: {13} \n Nutch Sequence: {14}  Custom Schema: {15} \n Common Crawl Format: {16} \n WARC: {17} \n Needed by: {18} \n \n Thanks \n Memex Crawl Team'""".format(first, last, email, description, crawl_type, recurring, seed_ulrs, crawling_config, content_type, how_much_data, custom_metrics, extraction, common_data_repository, raw_files, nutch_sequence_files, custom_schema, common_crawl_format, warc, needed_by)
     os.system(client_email)
     os.system(memex_email)
 
