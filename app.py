@@ -32,7 +32,32 @@ def send_mail(form):
     warc = form.warc.data
     needed_by = form.needed_by.data
     client_email = "mail -s 'Memex Crawl Request' boustani@jpl.nasa.gov <<< 'Thank you for submitting your crawl data acquisition request to NASA JPL. Someone from the Crawl Team will contact you personally certainly within the next 24 hours. Our Crawl Infrastructure is already working on acquiring your requested data. If you have any issues, please do not hesitate to contact us on memex-crawl@jpl.nasa.gov. Thank you'"
-    memex_email = "mail -s '[New Crawl Request]' boustani@jpl.nasa.gov <<< 'Request from {0} {1} and email: {2}' ".format(first, last, email)
+    memex_email = """ mail -s '[New Crawl Request]' boustani@jpl.nasa.gov <<<
+    'Request details:
+        First Name:{0}
+        Last Name:{1}
+        Email: {2}
+        Description: {3}
+        Crawl Type: {4}
+        Recurring: {5}
+        Seed Urls: {6}
+        Crawling Config: {7}
+        Content Type: {8}
+        How much data: {9}
+        Custom Metrics: {10}
+        Extraction: {11}
+        Common Data Repository: {12}
+        Raw Files: {13}
+        Nutch Sequence: {14}
+        Custom Schema: {15}
+        Common Crawl Format: {16}
+        WARC: {17}
+        Needed by: {18}
+
+    Thanks
+    Memex Crawl Team
+    '
+    """.format(first, last, email, description, crawl_type, recurring, seed_ulrs, crawling_config, content_type, how_much_data, custom_metrics, extraction, common_data_repository, raw_files, nutch_sequence_files, custom_schema, common_crawl_format, warc, needed_by)
     os.system(client_email)
     os.system(memex_email)
 
