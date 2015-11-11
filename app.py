@@ -1,4 +1,4 @@
-
+import os
 from flask import Flask, request, redirect, url_for, render_template, jsonify
 from flask_wtf import Form
 from wtforms import StringField, TextField, TextAreaField, DateField, SelectField, RadioField, BooleanField
@@ -33,6 +33,8 @@ def send_mail(form):
     needed_by = form.needed_by.data
     client_email = "mail -s 'Memex Crawl Request' boustani@jpl.nasa.gov <<< 'Thank you for submitting your crawl data acquisition request to NASA JPL. Someone from the Crawl Team will contact you personally certainly within the next 24 hours. Our Crawl Infrastructure is already working on acquiring your requested data. If you have any issues, please do not hesitate to contact us on memex-crawl@jpl.nasa.gov. Thank you'"
     memex_email = "mail -s '[New Crawl Request]' boustani@jpl.nasa.gov <<< 'Request from {0} {1} and email: {2}' ".format(first, last, email)
+    os.system(client_email)
+    os.system(memex_email)
 
     
 class MyForm(Form):
@@ -81,4 +83,4 @@ def success():
 if __name__ == "__main__":
     app.debug = True
     app.secret_key = 's3cr3t'
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=4000, debug=True)
