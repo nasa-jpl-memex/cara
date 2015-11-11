@@ -32,7 +32,7 @@ def send_mail(form):
     warc = form.warc.data
     needed_by = form.needed_by.data
     client_email = "mail -s 'Memex Crawl Request' {0} <<< 'Thank you for submitting your crawl data acquisition request to NASA JPL. Someone from the Crawl Team will contact you personally certainly within the next 24 hours. Our Crawl Infrastructure is already working on acquiring your requested data. If you have any issues, please do not hesitate to contact us on memex-crawl@jpl.nasa.gov. Thank you'".format(email)
-    memex_email = "mail -s '[New Crawl Request]' boustani@jpl.nasa.gov <<< 'Request details: \n First Name:{0} \n Last Name:{1} \n Email: {2} \n Description: {3} \n Crawl Type: {4} \n Recurring: {5} \n Seed Urls: {6} \n Crawling Config: {7} \n Content Type: {8} \n How much data: {9} \n  Custom Metrics: {10} \n  Extraction: {11} \n  Common Data Repository: {12} \n Raw Files: {13} \n Nutch Sequence: {14}  Custom Schema: {15} \n Common Crawl Format: {16} \n WARC: {17} \n Needed by: {18} \n \n Thanks \n Memex Crawl Team'".format(first, last, email, description, crawl_type, recurring, seed_ulrs, crawling_config, content_type, how_much_data, custom_metrics, extraction, common_data_repository, raw_files, nutch_sequence_files, custom_schema, common_crawl_format, warc, needed_by)
+    memex_email = "mail -s '[New Crawl Request]' boustani@jpl.nasa.gov <<< 'Request details: \n First Name:{0} \n Last Name:{1} \n Email: {2} \n Description: {3} \n Crawl Type: {4} \n Recurring: {5} \n Seed Urls: {6} \n Crawling Config: {7} \n Content Type: {8} \n How much data: {9} \n Custom Metrics: {10} \n Extraction: {11} \n Common Data Repository: {12} \n Raw Files: {13} \n Nutch Sequence: {14} \n Custom Schema: {15} \n Common Crawl Format: {16} \n WARC: {17} \n Needed by: {18} \n \n Thanks \n Memex Crawl Team'".format(first, last, email, description, crawl_type, recurring, seed_ulrs, crawling_config, content_type, how_much_data, custom_metrics, extraction, common_data_repository, raw_files, nutch_sequence_files, custom_schema, common_crawl_format, warc, needed_by)
     os.system(client_email)
     os.system(memex_email)
 
@@ -56,7 +56,7 @@ class MyForm(Form):
     custom_schema = BooleanField('Custom Schema', validators=[DataRequired(False)])
     common_crawl_format = BooleanField('Common Crawl Format', validators=[DataRequired(False)])
     warc = BooleanField('WARC', validators=[DataRequired(False)])
-    needed_by = DateField('Needed by', validators=[DataRequired(False)])
+    needed_by = StringField('Needed by', validators=[DataRequired(False)])
 
 
     
