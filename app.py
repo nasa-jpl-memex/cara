@@ -31,7 +31,7 @@ def send_mail(form):
     common_crawl_format = form.common_crawl_format.data
     warc = form.warc.data
     needed_by = form.needed_by.data
-    client_email = "mail -s 'Memex Crawl Request' {0} <<< 'Thank you for submitting your crawl data acquisition request to NASA JPL. Someone from the Crawl Team will contact you personally certainly within the next 24 hours. Our Crawl Infrastructure is already working on acquiring your requested data. If you have any issues, please do not hesitate to contact us on memex-crawl@jpl.nasa.gov. Thank you'".format(email)
+    client_email = "mail -s 'Memex Crawl Request' {0} <<< 'Thank you for submitting your crawl data acquisition request to NASA JPL.\n Someone from the Crawl Team will contact you personally certainly within the next 24 hours. Our Crawl Infrastructure is already working on acquiring your requested data. If you have any issues, please do not hesitate to contact us on memex-crawl@jpl.nasa.gov. Thank you'".format(email)
     memex_email = """ mail -s '[New Crawl Request]' boustani@jpl.nasa.gov <<<
     'Request details:
         First Name:{0}
