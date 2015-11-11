@@ -11,28 +11,28 @@ import smtplib
 from email.mime.text import MIMEText
 
 
-def send_mail():
-    message = """Test content"""
-    
-    email = MIMEText(message)
-    email['From'] = "mazi@text.com"
-    email['To'] = "maziyar_b4@yahoo.com"
-    #email['Cc'] = "Thomas.Painter@jpl.nasa.gov,Kathryn.J.Bormann@jpl.nasa.gov"
-    email["Subject"] = "Test Subject."
-    
-    server = smtplib.SMTP("localhost")
-    
-    try:
-        server.sendmail(
-            email["From"],
-            email["To"].split(','),#+ email["Cc"].split(','),
-            email.as_string()
-        )
-    finally:
-        server.quit()
-
-
-#send_mail()
+def send_mail(form):
+    first = form.first.data
+    last = form.last.data
+    email = form.email.data
+    description = form.description.data
+    crawl_type = form.crawl_type.data
+    recurring = form.recurring.data
+    seed_ulrs = form.seed_ulrs.data
+    crawling_config = form.crawling_config.data
+    content_type = form.content_type.data
+    how_much_data = form.how_much_data.data
+    custom_metrics = form.custom_metrics.data
+    extraction = form.extraction.data
+    common_data_repository = form.common_data_repository.data
+    raw_files = form.raw_files.data
+    nutch_sequence_files = form.nutch_sequence_files.data
+    custom_schema = form.custom_schema.data
+    common_crawl_format = form.common_crawl_format.data
+    warc = form.warc.data
+    needed_by = form.needed_by.data
+    client_email = "mail -s 'Memex Crawl Request' boustani@jpl.nasa.gov <<< 'Thank you for submitting your crawl data acquisition request to NASA JPL. Someone from the Crawl Team will contact you personally certainly within the next 24 hours. Our Crawl Infrastructure is already working on acquiring your requested data. If you have any issues, please do not hesitate to contact us on memex-crawl@jpl.nasa.gov. Thank you'"
+    memex_email = "mail -s '[New Crawl Request]' boustani@jpl.nasa.gov <<< 'Request from {0} {1} and email: {2}' ".format(first, last, email)
 
     
 class MyForm(Form):
@@ -64,31 +64,10 @@ def index():
     form = MyForm()
     error = ""
     if form.validate_on_submit():
-        first = form.first.data
-        last = form.last.data
-        email = form.email.data
-        description = form.description.data
-        crawl_type = form.crawl_type.data
-        recurring = form.recurring.data
-        seed_ulrs = form.seed_ulrs.data
-        crawling_config = form.crawling_config.data
-        content_type = form.content_type.data
-        how_much_data = form.how_much_data.data
-        custom_metrics = form.custom_metrics.data
-        extraction = form.extraction.data
-        common_data_repository = form.common_data_repository.data
-        raw_files = form.raw_files.data
-        nutch_sequence_files = form.nutch_sequence_files.data
-        custom_schema = form.custom_schema.data
-        common_crawl_format = form.common_crawl_format.data
-        warc = form.warc.data
-        needed_by = form.needed_by.data
-        #execfile("script/email.py") 
+        send_mail(form)
         return redirect('/success')
     else:
         pass
-        #error = "Faild to send request. Please make sure to complete all fields."
-
     return render_template('index.html', form=form, error=error, message=message, backhome="")
 
 
@@ -103,13 +82,3 @@ if __name__ == "__main__":
     app.debug = True
     app.secret_key = 's3cr3t'
     app.run(host="127.0.0.1", port=5000, debug=True)
-
-
-# Input
-# Text area
-# Dropdown
-# Send button
-# lists
-#     radio button
-#     checkboxes
-# Checkbox
